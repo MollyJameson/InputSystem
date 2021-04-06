@@ -16,7 +16,7 @@ namespace UnityEngine.InputSystem.Editor
 
         internal int elementIndex { get; set; } = -1;
 
-        public IEnumerable<AdvancedDropdownItem> children => m_Children;
+        public IList<AdvancedDropdownItem> children => m_Children;
 
         protected string m_SearchableName;
         public virtual string searchableName => string.IsNullOrEmpty(m_SearchableName) ? name : m_SearchableName;

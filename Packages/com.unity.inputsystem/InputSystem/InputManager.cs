@@ -1303,6 +1303,20 @@ namespace UnityEngine.InputSystem
             // Let listeners know.
             for (var i = 0; i < m_DeviceChangeListeners.length; ++i)
                 m_DeviceChangeListeners[i](device, InputDeviceChange.Removed);
+
+            // For keyboard, try to set one as current.
+            // https://fogbugz.unity3d.com/f/cases/1305016/
+            for (var i = 0; i < m_Devices.Length; ++i)
+            {
+                var candidate = m_Devices[i];
+                if (candidate == null || !candidate.enabled)
+                    continue;
+
+                if (!(device is Keyboard) || !(candidate is Keyboard))
+                    continue;
+                candidate.MakeCurrent();
+                break;
+            }
         }
 
         public void FlushDisconnectedDevices()

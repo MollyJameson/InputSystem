@@ -262,7 +262,7 @@ internal class OnScreenTests : CoreTestsFixture
 
         Assert.That(Gamepad.all[0].buttonSouth.isPressed, Is.False);
     }
-    
+
     // https://fogbugz.unity3d.com/f/cases/1305016/
     [Test]
     [Category("Devices")]
@@ -277,7 +277,7 @@ internal class OnScreenTests : CoreTestsFixture
         button.controlPath = "<Keyboard>/a";
 
         Assert.That(Keyboard.current, Is.Not.EqualTo(systemKeyboard));
-        Assert.That(Keyboard.current, Is.Not.Null); 
+        Assert.That(Keyboard.current, Is.Not.Null);
 
         gameObject.SetActive(false);
 

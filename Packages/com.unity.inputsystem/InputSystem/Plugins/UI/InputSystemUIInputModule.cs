@@ -1503,6 +1503,13 @@ namespace UnityEngine.InputSystem.UI
                 m_CurrentPointerId = pointerId;
                 m_CurrentPointerType = pointerType;
 
+                if (point != null && point.action != null)
+                {
+                    var state = m_PointerStates[m_CurrentPointerIndex];
+                    state.screenPosition = point.action.ReadValue<Vector2>();
+                    m_PointerStates[m_CurrentPointerIndex] = state;
+                }
+
                 return m_CurrentPointerIndex;
             }
 
@@ -1560,6 +1567,13 @@ namespace UnityEngine.InputSystem.UI
             m_CurrentPointerId = pointerId;
             m_CurrentPointerIndex = index;
             m_CurrentPointerType = pointerType;
+            
+            if (point != null && point.action != null)
+            {
+                var state = m_PointerStates[m_CurrentPointerIndex];
+                state.screenPosition = point.action.ReadValue<Vector2>();
+                m_PointerStates[m_CurrentPointerIndex] = state;
+            }
 
             return index;
         }

@@ -51,6 +51,7 @@ however, it has to be formatted properly to pass verification tests.
 - Fixed UI not working after additively loading scenes with additional InputSystemUIInputModule modules ([case 1251720](https://issuetracker.unity3d.com/issues/input-system-buttons-cannot-be-pressed-after-additively-loading-scenes-with-additional-event-systems)).
 - Fixed no `OnPointerExit` received when changing UI state without moving pointer ([case 1232705](https://issuetracker.unity3d.com/issues/input-system-onpointerexit-is-not-triggered-when-a-ui-element-interrupts-a-mouse-hover)).
 - Fixed "Scheme Name" label clipped in "Add Control Schema" popup window ([case 1199560]https://issuetracker.unity3d.com/issues/themes-input-system-scheme-name-is-clipped-in-add-control-schema-window-with-inter-default-font)).
+- Fixed `InputSystemUIInputModule` raycasting in invalid position if a new touch was pressed without a prior point event ([case 1311018](https://issuetracker.unity3d.com/issues/ugui-toggle-malfunctions-when-simulated-touch-input-from-mouse-or-pen-is-enabled)).
 
 #### Actions
 

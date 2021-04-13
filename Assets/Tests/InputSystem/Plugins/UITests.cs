@@ -1151,6 +1151,16 @@ internal class UITests : CoreTestsFixture
             )
         );
     }
+    
+    [Test]
+    [Category("UI")]
+    public void UI_CanAddUIModuleInRuntimeAndHaveDefaultAsset()
+    {
+        var gameObject = new GameObject();
+        var inputModule = gameObject.AddComponent<InputSystemUIInputModule>();
+
+        Assert.That(inputModule.actionsAsset, Is.Not.Null);
+    }
 
     [UnityTest]
     [Category("UI")]

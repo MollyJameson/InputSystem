@@ -20,6 +20,7 @@ however, it has to be formatted properly to pass verification tests.
 - Display names of keyboard buttons are now passed through `ToLower` and `ToTitleCase` to enforce consistent casing between different platforms and keyboard layouts ([case 1254705](https://issuetracker.unity3d.com/issues/the-display-names-for-keyboard-keys-in-the-input-debugger-do-not-match-those-defined-in-input-system-package)).
 - Editor: All remaining `InputUser` instances are now removed automatically when exiting play mode. This means that all devices are automatically unpaired.
   * In essence, like `InputAction`, `InputUser` is now considered a player-only feature.
+- `InputSystemUIInputModule` created in runtime will now have default input actions asset set, previously input actions asset was `null` ([case 1323566](https://issuetracker.unity3d.com/product/unity/issues/guid/1323566/)).
 
 #### Actions
 

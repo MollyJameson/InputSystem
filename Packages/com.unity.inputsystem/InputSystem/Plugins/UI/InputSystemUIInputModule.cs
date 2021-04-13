@@ -1204,8 +1204,35 @@ namespace UnityEngine.InputSystem.UI
             set => throw new InvalidOperationException();
         }
 
+        private void CheckForDefaultInitialization()
+        {
+            // Special handling for https://fogbugz.unity3d.com/f/cases/1323566/
+            // If InputSystemUIInputModule is created via AddComponent called in Awake of one of the scripts that is present during scene creation,
+            // then deserialization of default references happens after Awake/OnEnable,
+            // and our logic relies on values of serialized fields not change after Awake/OnEnable.
+            // If we detect a potential situation like this, set the default input actions by hand to prevent it.
+            if (m_ActionsAsset != null || m_PointAction != null || m_MoveAction != null || m_SubmitAction != null ||
+                m_CancelAction != null || m_LeftClickAction != null || m_MiddleClickAction != null ||
+                m_RightClickAction != null || m_ScrollWheelAction != null || m_TrackedDevicePositionAction != null ||
+                m_TrackedDeviceOrientationAction != null) return;
+            var defaultActions = new DefaultInputActions();
+            m_ActionsAsset = defaultActions.asset;
+            m_PointAction = InputActionReference.Create(defaultActions.@UI.Point);
+            m_MoveAction = InputActionReference.Create(defaultActions.@UI.Navigate);
+            m_SubmitAction = InputActionReference.Create(defaultActions.@UI.Submit);
+            m_CancelAction = InputActionReference.Create(defaultActions.@UI.Cancel);
+            m_LeftClickAction = InputActionReference.Create(defaultActions.@UI.Click);
+            m_MiddleClickAction = InputActionReference.Create(defaultActions.@UI.MiddleClick);
+            m_RightClickAction = InputActionReference.Create(defaultActions.@UI.RightClick);
+            m_ScrollWheelAction = InputActionReference.Create(defaultActions.@UI.ScrollWheel);
+            m_TrackedDevicePositionAction = InputActionReference.Create(defaultActions.@UI.TrackedDevicePosition);
+            m_TrackedDeviceOrientationAction = InputActionReference.Create(defaultActions.@UI.TrackedDeviceOrientation);
+        }
+
         protected override void Awake()
         {
+            CheckForDefaultInitialization();
+
             base.Awake();
 
             m_NavigationState.Reset();
@@ -1914,6 +1941,8 @@ namespace UnityEngine.InputSystem.UI
             get => m_ActionsAsset;
             set
             {
+                CheckForDefaultInitialization();
+
                 if (value != m_ActionsAsset)
                 {
                     var wasEnabled = IsAnyActionEnabled();

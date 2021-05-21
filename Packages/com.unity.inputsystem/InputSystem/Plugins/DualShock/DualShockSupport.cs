@@ -39,6 +39,13 @@ namespace UnityEngine.InputSystem.DualShock
                     .WithCapability("productId", 0x5C4)); // Wireless controller.
             InputSystem.RegisterPrecompiledLayout<FastDualShock4GamepadHID>(FastDualShock4GamepadHID.metadata);
 
+            // DualSense PS5
+            InputSystem.RegisterLayout<DualSense5GamepadHID>(
+                matches: new InputDeviceMatcher()
+                    .WithInterface("HID")
+                    .WithCapability("vendorId", 0x54C) // Sony Entertainment.
+                    .WithCapability("productId", 0xCE6)); // Wireless controller.
+         
             // Just to make sure, also set up a matcher that goes by strings so that we cover
             // all bases.
             InputSystem.RegisterLayoutMatcher<DualShock4GamepadHID>(
